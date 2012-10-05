@@ -64,13 +64,22 @@
 	// Threaded Comments
 	function enable_threaded_comments() {
 	    if (!is_admin()) {
-	        if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1))
+	        if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
 	            wp_enqueue_script('comment-reply');
 	    }
 	}
 	
 	// Theme Stylesheets using Enqueue
 	function html5blank_styles() {
+		// Load Open Sans from Google Fonts, http://www.google.com/webfonts/specimen/Open+Sans
+		$subsets = 'latin,latin-ext';
+		$protocol = is_ssl() ? 'https' : 'http';
+		$query_args = array(
+			'family' => 'Open+Sans:400italic,700italic,400,700',
+			'subset' => $subsets,
+		);
+		wp_enqueue_style( 'twentytwelve-fonts', add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ), array(), null );
+
 	    wp_register_style('mux-style', get_template_directory_uri() . '/css/style.css', array(), '1.0', 'all');
 	    wp_enqueue_style('mux-style'); // Enqueue it!
 	}
