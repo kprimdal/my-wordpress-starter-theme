@@ -165,6 +165,15 @@
 	    return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
 	}
 
+	// Add the class current-menu-item if one of the references is shown
+	function current_type_nav_class($classes, $item) {
+	    $post_type = get_query_var('post_type');
+	    if ($item->attr_title != '' && $item->attr_title == $post_type) {
+	        array_push($classes, 'current-menu-item');
+	    };
+	    return $classes;
+	}
+
 /* =============================================================================
    Actions + Filters + ShortCodes
    ========================================================================== */
@@ -202,6 +211,8 @@
 	add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 	add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 	add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
+	add_filter('nav_menu_css_class', 'current_type_nav_class', 10, 2 ); // Add the class current-menu-item if one of the references is shown
+
 
 /* =============================================================================
    Custom Post Types
