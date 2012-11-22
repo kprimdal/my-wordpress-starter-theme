@@ -1,0 +1,17 @@
+/**
+ * Variables
+ */
+
+$backgroundColor:	#fff;
+$fontSize:			14px;
+$linkColor:			#000;
+
+$fontFamily: 		"Open Sans", Helvetica, Arial, sans-serif;
+
+/**
+ * Imports
+ */
+
+@import "reset";
+@import "grid"; 		// Foundation Grid System
+@import "layout";
