@@ -1,6 +1,20 @@
 <?php
 
 /* =============================================================================
+   Constants
+   ========================================================================== */
+
+if(!defined('MUX_THEME_DIR')) {
+	define('MUX_THEME_DIR', plugin_dir_path( __FILE__ ));
+}
+if(!defined('MUX_THEME_URL')) {
+	define('MUX_THEME_URL', plugin_dir_url( __FILE__ ));
+}
+if( !defined( 'MUX_THEME_VERSION' ) ) {
+	define( 'MUX_THEME_VERSION', '0.1' );
+}
+
+/* =============================================================================
    External Modules/Files
    ========================================================================== */
 
@@ -29,13 +43,10 @@
 	function html5blank_scripts() {
 	    if (!is_admin()) {
 	        wp_deregister_script('jquery'); // Deregister WordPress jQuery
-	        wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js', 'jquery', '1.8.2'); // Load Google CDN jQuery
+	        wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', 'jquery', '1.8.3'); // Load Google CDN jQuery
 	        wp_enqueue_script('jquery'); // Enqueue it!
 	        
-	        wp_register_script('modernizr', get_template_directory_uri() . '/js/modernizr.js', 'jquery', '2.6.2'); // Modernizr with version Number at the end
-	        wp_enqueue_script('modernizr'); // Enqueue it!
-	        
-	        wp_register_script('mux-script', get_template_directory_uri() . '/js/scripts.js', 'jquery', '1.0.0'); // HTML5 Blank script with version number
+	        wp_register_script('mux-script', MUX_THEME_URL . 'js/scripts.js', 'jquery', MUX_THEME_VERSION ); // HTML5 Blank script with version number
 	        wp_enqueue_script('mux-script'); // Enqueue it!
 	        
 	    }
@@ -52,7 +63,7 @@
 	function add_jquery_fallback() {
 	    echo "<!-- Protocol Relative jQuery fall back if Google CDN offline -->";
 	    echo "<script>";
-	    echo "window.jQuery || document.write('<script src='" . get_bloginfo('template_url') . "/js/jquery-1.8.2.min.js'><\/script>')";
+	    echo "window.jQuery || document.write('<script src='" . MUX_THEME_URL . "js/jquery-1.8.2.min.js'><\/script>')";
 	    echo "</script>";
 	}
 	
@@ -75,7 +86,7 @@
 		);
 		wp_enqueue_style( 'twentytwelve-fonts', add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ), array(), null );
 
-	    wp_register_style('mux-style', get_template_directory_uri() . '/css/style.css', array(), '1.0', 'all');
+	    wp_register_style('mux-style', MUX_THEME_URL . 'css/style.css', array(), MUX_THEME_VERSION, 'all');
 	    wp_enqueue_style('mux-style'); // Enqueue it!
 	}
 	
