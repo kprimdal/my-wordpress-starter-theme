@@ -29,7 +29,7 @@ if ( function_exists( 'add_theme_support' ) ) {
 	// add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
 
 	// Localisation Support
-	// load_theme_textdomain('html5blank', get_template_directory() . '/languages');
+	// load_theme_textdomain('mux', get_template_directory() . '/languages');
 }
 
 /* =============================================================================
@@ -37,7 +37,7 @@ if ( function_exists( 'add_theme_support' ) ) {
    ========================================================================== */
 
 // Load Custom Theme Scripts using Enqueue
-function html5blank_scripts() {
+function mux_scripts() {
 	if ( !is_admin() ) {
 		wp_deregister_script( 'jquery' ); // Deregister WordPress jQuery
 		wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', 'jquery', '1.8.3' ); // Load Google CDN jQuery
@@ -73,7 +73,7 @@ function enable_threaded_comments() {
 }
 
 // Theme Stylesheets using Enqueue
-function html5blank_styles() {
+function mux_styles() {
 	// Load Open Sans from Google Fonts, http://www.google.com/webfonts/specimen/Open+Sans
 	$subsets = 'latin,latin-ext';
 	$protocol = is_ssl() ? 'https' : 'http';
@@ -90,8 +90,8 @@ function html5blank_styles() {
 // Register HTML5 Blank's Navigation
 function register_html5_menu() {
 	register_nav_menus( array( // Using array to specify more menus if needed
-			'header-menu' => __( 'Header Menu', 'html5blank' ), // Main Navigation
-			// 'sidebar-menu' => __('Sidebar Menu', 'html5blank'), // Sidebar Navigation
+			'header-menu' => __( 'Header Menu', 'mux' ), // Main Navigation
+			// 'sidebar-menu' => __('Sidebar Menu', 'mux'), // Sidebar Navigation
 		) );
 }
 
@@ -130,8 +130,8 @@ function add_slug_to_body_class( $classes ) {
 if ( function_exists( 'register_sidebar' ) ) {
 	// Define Sidebar Widget Area 1
 	register_sidebar( array(
-			'name' => __( 'Widget Area 1', 'html5blank' ),
-			'description' => __( 'Discription for this widget-area...', 'html5blank' ),
+			'name' => __( 'Widget Area 1', 'mux' ),
+			'description' => __( 'Discription for this widget-area...', 'mux' ),
 			'id' => 'widget-area-1',
 			'before_widget' => '<div id="%1$s" class="%2$s">',
 			'after_widget' => '</div>',
@@ -181,11 +181,11 @@ function current_type_nav_class( $classes, $item ) {
    ========================================================================== */
 
 // Add Actions
-add_action( 'init', 'html5blank_scripts' ); // Add Custom Scripts
+add_action( 'init', 'mux_scripts' ); // Add Custom Scripts
 add_action( 'wp_print_scripts', 'conditional_scripts' ); // Add Conditional Page Scripts
 add_action( 'wp_footer', 'add_jquery_fallback' ); // jQuery fallbacks loaded through footer
 add_action( 'get_header', 'enable_threaded_comments' ); // Enable Threaded Comments
-add_action( 'wp_enqueue_scripts', 'html5blank_styles' ); // Add Theme Stylesheet
+add_action( 'wp_enqueue_scripts', 'mux_styles' ); // Add Theme Stylesheet
 add_action( 'init', 'register_html5_menu' ); // Add HTML5 Blank Menu
 add_action( 'widgets_init', 'my_remove_recent_comments_style' ); // Remove inline Recent Comment Styles from wp_head()
 
